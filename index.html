@@ -110,9 +110,10 @@
     }
 
     .demo-container {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-end;
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-template-rows: 792px;
+      align-items: end;
       justify-content: center;
       gap: 0.75rem;
       max-width: 100%;
@@ -120,6 +121,8 @@
 
     .demo-frame-wrapper {
       position: relative;
+      grid-column: 2;
+      grid-row: 1;
       padding: 0.75rem;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -143,18 +146,14 @@
       pointer-events: none;
     }
 
-    .demo-hint {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.5rem;
-      pointer-events: none;
-      max-width: 190px;
-      flex-shrink: 0;
-      margin-bottom: 6rem;
-    }
-
     .demo-hint-text {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: end;
+      align-self: end;
+      max-width: 190px;
+      margin-bottom: 12rem;
+      pointer-events: none;
       background: var(--gradient);
       color: #fff;
       font-size: 0.8125rem;
@@ -168,10 +167,15 @@
     }
 
     .demo-hint-arrow {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: end;
+      align-self: end;
       width: 88px;
       height: 40px;
+      margin-bottom: 3.25rem;
       color: var(--accent-coral);
-      flex-shrink: 0;
+      pointer-events: none;
       animation: bounce-arrow 1.6s ease-in-out infinite;
     }
 
@@ -306,23 +310,23 @@
 
     @media (max-width: 720px) {
       .demo-container {
+        display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
-      }
-
-      .demo-hint {
-        order: -1;
-        max-width: 100%;
-        align-items: center;
-        margin-bottom: 0.75rem;
+        grid-template-rows: none;
       }
 
       .demo-hint-text {
+        order: -2;
+        margin-bottom: 0.75rem;
         text-align: center;
+        justify-self: center;
       }
 
       .demo-hint-arrow {
+        order: -1;
+        margin-bottom: 0.5rem;
         width: 48px;
         height: 48px;
         transform: rotate(45deg);
@@ -336,6 +340,8 @@
       .demo-frame-wrapper {
         width: 100%;
         overflow: hidden;
+        grid-column: auto;
+        grid-row: auto;
       }
 
       .demo-frame-wrapper iframe {
@@ -388,12 +394,10 @@
     <section class="demo-section" aria-label="Interactive demo">
       <p class="demo-label">Interactive Demo</p>
       <div class="demo-container">
-        <div class="demo-hint" aria-hidden="true">
-          <span class="demo-hint-text">Tap or click the chat bubble to start the demo</span>
-          <svg class="demo-hint-arrow" viewBox="0 0 88 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M4 20 H72 M72 20 L58 8 M72 20 L58 32" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <span class="demo-hint-text">Tap or click the chat bubble to start the demo</span>
+        <svg class="demo-hint-arrow" viewBox="0 0 88 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 20 H72 M72 20 L58 8 M72 20 L58 32" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <div class="demo-frame-wrapper">
           <iframe
             src="https://demo-on-demand.com/share/CD56376?embed=true"
