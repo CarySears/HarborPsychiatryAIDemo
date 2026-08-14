@@ -1,1 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harbor Psychiatry Demo | ActionPotential.AI</title>
+  <meta name="description" content="Interactive demo for Harbor Psychiatry, powered by ActionPotential.AI. Schedule a consultation to learn more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-elevated: #1a1a26;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f4f4f8;
+      --text-muted: #9b9bb0;
+      --accent-coral: #e85d4c;
+      --accent-magenta: #c44b8a;
+      --accent-blue: #4a9fd4;
+      --gradient: linear-gradient(135deg, var(--accent-coral), var(--accent-magenta));
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(232, 93, 76, 0.12), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(196, 75, 138, 0.1), transparent),
+        radial-gradient(ellipse 50% 30% at 50% 50%, rgba(74, 159, 212, 0.06), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo {
+      display: block;
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      margin: 0 auto 1.5rem;
+    }
+
+    .tagline {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .demo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .demo-frame-wrapper {
+      position: relative;
+      padding: 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+        0 24px 48px rgba(0, 0, 0, 0.4);
+    }
+
+    .demo-frame-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 1.3rem;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(232, 93, 76, 0.3), rgba(196, 75, 138, 0.2), rgba(74, 159, 212, 0.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .demo-label {
+      text-align: center;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .cta-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .cta-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .cta-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .cta-card h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-card p {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      font-family: inherit;
+      text-decoration: none;
+      border-radius: 0.625rem;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn:hover {
+      opacity: 0.92;
+      transform: scale(1.02);
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: var(--surface-elevated);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(74, 159, 212, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 1.5rem 1rem 3rem;
+      }
+
+      .logo {
+        max-width: 260px;
+      }
+
+      .demo-frame-wrapper {
+        padding: 0.5rem;
+        border-radius: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <img
+        src="logo-cropped (1).png"
+        alt="ActionPotential.AI"
+        class="logo"
+        width="320"
+        height="auto"
+      >
+      <p class="tagline">
+        Experience the Harbor Psychiatry interactive demo — powered by ActionPotential.AI.
+      </p>
+    </header>
+
+    <section class="demo-section" aria-label="Interactive demo">
+      <p class="demo-label">Interactive Demo</p>
+      <div class="demo-frame-wrapper">
+        <iframe
+          src="https://demo-on-demand.com/share/CD56376?embed=true"
+          width="392"
+          height="768"
+          style="border: none; background: transparent; overflow: hidden; display: block; margin: 0 auto;"
+          title="Demo | Harbor Psychiatry"
+          allow="microphone *; camera *; autoplay *; clipboard-write *"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="cta-card">
+        <h2>Schedule a Consultation</h2>
+        <p>
+          Interested in bringing AI-powered demos to your practice? Book a time to discuss how ActionPotential.AI can help.
+        </p>
+        <a
+          href="https://link.actionpotential.ai/widget/booking/ksD7NPYqg5JoFugUIJnm"
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Book an Appointment
+        </a>
+      </div>
+
+      <div class="cta-card">
+        <h2>Learn More</h2>
+        <p>
+          Discover how ActionPotential.AI transforms patient engagement with intelligent, on-demand product demos.
+        </p>
+        <a
+          href="https://actionpotential.ai/"
+          class="btn btn-secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit ActionPotential.AI
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        Powered by <a href="https://actionpotential.ai/" target="_blank" rel="noopener noreferrer">ActionPotential.AI</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    window.addEventListener('message', function (e) {
+      if (e.data && e.data.type === 'dod-focus-lock') {
+        var x = window.pageXOffset, y = window.pageYOffset;
+        requestAnimationFrame(function () {
+          window.scrollTo(x, y);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
