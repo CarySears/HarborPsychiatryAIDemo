@@ -151,7 +151,7 @@
       pointer-events: none;
       max-width: 190px;
       flex-shrink: 0;
-      margin-bottom: 13rem;
+      margin-bottom: 6rem;
     }
 
     .demo-hint-text {
@@ -168,15 +168,11 @@
     }
 
     .demo-hint-arrow {
-      position: absolute;
-      bottom: 5.25rem;
-      left: -5.5rem;
       width: 88px;
       height: 40px;
       color: var(--accent-coral);
+      flex-shrink: 0;
       animation: bounce-arrow 1.6s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 2;
     }
 
     @keyframes bounce-arrow {
@@ -327,9 +323,6 @@
       }
 
       .demo-hint-arrow {
-        left: auto;
-        right: 1.25rem;
-        bottom: 8.5rem;
         width: 48px;
         height: 48px;
         transform: rotate(45deg);
@@ -397,11 +390,11 @@
       <div class="demo-container">
         <div class="demo-hint" aria-hidden="true">
           <span class="demo-hint-text">Tap or click the chat bubble to start the demo</span>
-        </div>
-        <div class="demo-frame-wrapper">
           <svg class="demo-hint-arrow" viewBox="0 0 88 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M4 20 H72 M72 20 L58 8 M72 20 L58 32" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+        </div>
+        <div class="demo-frame-wrapper">
           <iframe
             src="https://demo-on-demand.com/share/CD56376?embed=true"
             width="392"
